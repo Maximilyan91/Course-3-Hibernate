@@ -27,18 +27,16 @@ public class Application {
                 String employeeLastName = "Фамилия сотрудника: " + resultSet.getString("last_name");
                 String gender = "Пол сотрудника: " + resultSet.getString("gender");
                 String age = "Возраст: " + resultSet.getString("age");
+                String city = "Город: " + resultSet.getString("city_id");
 
                 // Выводим данные в консоль
                 System.out.println(employeeName + "\n" +
                         employeeLastName  + "\n" +
                         gender + "\n" +
-                        age);
+                        age + "\n" +
+                        city);
 
             }
-
-
         }
-
-
     }
 }
