@@ -1,3 +1,5 @@
+package org.employees;
+
 import java.sql.*;
 
 public class Application {
@@ -10,7 +12,8 @@ public class Application {
 
 // Создаем соединение с базой с помощью Connection
 // Формируем запрос к базе с помощью PreparedStatement
-        try (final Connection connection = DriverManager.getConnection(url, user, password); PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE id = (?)")) {
+        final Connection connection = DriverManager.getConnection(url, user, password);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE id = (?)"); {
 
 // Подставляем значение вместо wildcard
             statement.setInt(1, 5);
