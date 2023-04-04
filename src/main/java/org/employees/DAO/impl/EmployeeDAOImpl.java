@@ -3,15 +3,21 @@ package org.employees.DAO.impl;
 import org.employees.City;
 import org.employees.DAO.EmployeeDAO;
 import org.employees.Employee;
+
 import java.sql.*;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
+
+    final String user = "postgres";
+    final String password = "4717";
+    final String url = "jdbc:postgresql://localhost:5432/skypro";
+
     @Override
     public void create(Employee employee) {
-        try(PreparedStatement statement = connection.prepareStatement(
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO employee (first_name, last_name, gender, age, city_id) VALUES ((?), (?), (?), (?), (?),)")) {
 
             // Подставляем значение вместо wildcard
@@ -37,7 +43,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public Employee readById(int id) {
         Employee employee = new Employee();
         // Формируем запрос к базе с помощью PreparedStatement
-        try (PreparedStatement statement = connection.prepareStatement(
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM employee INNER JOIN city ON employee.city_id=city.city_id AND id=(?)")) {
 
             // Подставляем значение вместо wildcard
@@ -48,7 +55,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
             // Методом next проверяем есть ли следующий элемент в resultSet
             // и одновременно переходим к нему, если таковой есть
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 // С помощью методов getInt и getString получаем данные из resultSet
                 // и присваиваем их полим объекта
@@ -73,7 +80,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         // Создаем список, в который будем укладывать объекты
         List<Employee> employeeList = new ArrayList<>();
 
-        try(PreparedStatement statement = connection.prepareStatement(
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM employee INNER JOIN city ON employee.city_id=city.city_id")) {
 
             ResultSet resultSet = statement.executeQuery();
@@ -101,7 +109,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void updateEmployeeById(int id, int cityID) {
-        try(PreparedStatement statement = connection.prepareStatement(
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(
                 "UPDATE employee SET city_id=(?) WHERE id=(?)")) {
 
             statement.setInt(1, cityID);
@@ -116,7 +125,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void deleteById(int id) {
-        try(PreparedStatement statement = connection.prepareStatement(
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(
                 "DELETE FROM employee WHERE id=(?)")) {
 
             statement.setInt(1, id);

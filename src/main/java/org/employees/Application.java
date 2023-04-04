@@ -1,5 +1,8 @@
 package org.employees;
 
+import org.employees.DAO.EmployeeDAO;
+import org.employees.DAO.impl.EmployeeDAOImpl;
+
 import java.sql.*;
 
 public class Application {
@@ -12,8 +15,8 @@ public class Application {
 
 // Создаем соединение с базой с помощью Connection
 // Формируем запрос к базе с помощью PreparedStatement
-        final Connection connection = DriverManager.getConnection(url, user, password);
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE id = (?)"); {
+        try (final Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE id = (?)")) {
 
 // Подставляем значение вместо wildcard
             statement.setInt(1, 5);
@@ -40,6 +43,14 @@ public class Application {
                         city);
 
             }
+
+
         }
+
+
+
+
+
     }
+
 }
