@@ -3,7 +3,7 @@ package org.employees;
 import java.util.Objects;
 
 public class Employee {
-    int id;
+    private int id;
     private String firstName;
     private String lastName;
     private String gender;

@@ -31,7 +31,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 
             // С помощью метода executeQuery отправляем запрос к базе
-            statement.executeQuery();
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
                 // С помощью методов getInt и getString получаем данные из resultSet
                 // и присваиваем их полим объекта
-                employee.setId(Integer.parseInt(resultSet.getString("id")));
+                employee.setId(Integer.getInteger(resultSet.getString("id")));
                 employee.setFirstName(resultSet.getString("first_name"));
                 employee.setLastName(resultSet.getString("last_name"));
                 employee.setGender(resultSet.getString("gender"));
@@ -87,7 +87,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
 
-                int id = Integer.parseInt(resultSet.getString("id"));
+                int id = Integer.getInteger(resultSet.getString("id"));
                 String firstName = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
                 String gender = resultSet.getString("gender");
@@ -130,7 +130,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 "DELETE FROM employee WHERE id=(?)")) {
 
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
