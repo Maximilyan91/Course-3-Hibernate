@@ -1,10 +1,16 @@
 package org.employees;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.Objects;
+@Entity
+@Table(name = "city")
 public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int cityID;
+    @Column(name = "city_name")
     private String cityName;
 
     public City() {

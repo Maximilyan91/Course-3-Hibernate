@@ -14,9 +14,9 @@ public interface EmployeeDAO {
     // Получение списка всех объектов Employee из базы
     List<Employee> readAll();
 
-    // Изменение конкретного объекта Employee в базе по id
-    void updateEmployeeById(int id, int cityID);
+    // Изменение конкретного объекта Employee в базе
+    void updateAmount(Employee employee);
 
-    // Удаление конкретного объекта Employee из базы по id
-    void deleteById(int id);
+    // Удаление конкретного объекта Employee из базы
+    void delete(Employee employee);
 }
